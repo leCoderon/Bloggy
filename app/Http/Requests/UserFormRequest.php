@@ -22,7 +22,7 @@ class UserFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'unique:users'],
+            'name' => ['required', 'unique:users', 'min:6'],
             'email' => ['required', 'email'],
             'password' => ['required', 'min:6', 'regex:/[A-Z]/'],
         ];
@@ -31,8 +31,8 @@ class UserFormRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'name.required' => 'Le champ nom est obligatoire.',
-            'name.alpha' => 'Le champ nom doit contenir uniquement des caractères alphabétiques.',
+            'name.required' => 'Le champ nom est obligatoire.',
+            'name.min' => 'Le champ nom doit contenir au moins 6 caractère.',
             'name.unique' => 'Le nom existe déjà, veuillez en choisir un autre.',
 
             'email.required' => 'L\'adresse e-mail est obligatoire.',

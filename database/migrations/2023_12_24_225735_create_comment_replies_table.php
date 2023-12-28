@@ -8,18 +8,18 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('comment_replies', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('content');
-            $table->integer('online');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('comment_id');
+            $table->longText('content');
             $table->timestamps();
 
              // Lorsque onDelete('cascade') est utilisé, cela signifie que si un enregistrement parent est supprimé, tous les enregistrements enfants associés dans la table contenant la clé étrangère seront également automatiquement supprimés.
              $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
              
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('comment_replies');
     }
 };

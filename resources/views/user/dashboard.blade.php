@@ -32,6 +32,9 @@
                 @if (sizeof($myArticle) === 0)
                     <div class="alert alert-info">Vous n'avez pas encore créé d'articles.</div>
                 @else
+                
+                <div class="d-flex justify-content-center"> {{ $myArticle->links() }}
+                </div>
                     <table class="table">
                         <thead>
                             <tr>

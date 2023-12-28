@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,9 @@ class ArticleController extends Controller
      */
     public function index(Article $article)
     {
-        $articles = $article::where('online', 1)->paginate(3);
+
+        // Pour afficher les articles les plus récents
+        $articles = $article::orderBy('updated_at', 'desc')->paginate(10);
         return view('article.index', ['articles' => $articles]);
     }
     /**
@@ -24,9 +27,28 @@ class ArticleController extends Controller
      */
     public function homepage(Article $article)
     {
-        $articles = $article::where('online', 1)->paginate(3);
+        // Pour afficher les articles les plus récents
+        $articles = $article::orderBy('updated_at', 'desc')->paginate(10);
         return view('homepage', ['articles' => $articles]);
     }
+
+
+    // Likes on articles
+    public function like(Article $article)
+    {
+        $user = auth()->user();
+
+        if (!$user->likedArticles->contains($article->id)) {
+            $user->likedArticles()->attach($article->id);
+            $article->increment('likes');
+        } else {
+            $user->likedArticles()->detach($article->id);
+            $article->decrement('likes');
+        }
+
+        return response()->json(['success' => true, 'likes' => $article->likes]);
+    }
+
 
     /**
      * Display a form to create new article
@@ -52,9 +74,12 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(Article $article)
     {
-        return view('article.show', ['article' => $article]);
+        $likes = $article->likes()->count();
+
+        return view('article.show', ['article' => $article, 'likes' => $likes]);
     }
 
     /**
@@ -75,7 +100,7 @@ class ArticleController extends Controller
         $article->online = $request->online;
         $article->save();
         return redirect()->route('dashboard')->with('success', 'Votre article a bien été modifié');
-    
+
     }
 
     /**

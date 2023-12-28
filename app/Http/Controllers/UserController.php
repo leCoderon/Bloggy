@@ -17,8 +17,11 @@ class UserController extends Controller
     {
         $myArticle = Article::where('user_id', Auth::id())->paginate(3);
         return view('user.dashboard', ['myArticle' => $myArticle]);
-    
+
     }
+    
+  
+
     /**
      * Display a login form to user
      */

@@ -24,31 +24,36 @@
 
                 @forelse ($articles as $article)
                     <!-- Post preview-->
-                <div class="post-preview">
-                    <a href="{{route('article.show', $article->id)}}">
-                        <h2 class="post-title">{{$article->title}}</h2>
-                        <h3 class="post-subtitle">{{$article->sub_title}}</h3>
-                    </a>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#!">{{$article->author->name}}</a>
-                        on {{$article->created_at}}
-                    </p>
-                </div>
+                    <div class="post-preview">
+                        <a href="{{ route('article.show', $article->id) }}">
+                            <h2 class="post-title">{{ $article->title }}</h2>
+                            <h3 class="post-subtitle">{{ $article->sub_title }}</h3>
+                        </a>
+                        <div class="d-flex align-items-center post-meta">
+                            <img src="{{$article->author->avatar ? asset('../storage/avatars/' . $article->author->avatar) : '../default-avatar.png' }}"
+                                id="post_image" alt="">
+                            <div class="ms-3">
+                                <a href="#!">{{ $article->author->name }}</a><br>
+                                {{ $article->created_at }}
 
-                <!-- Divider-->
-                <hr class="my-4" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider-->
+                    <hr class="my-4" />
                 @empty
                     <div class="alert alert-info">
                         <p>Aucun contenu posté pour l'instant</p>
                     </div>
                 @endforelse
                 {{ $articles->links() }}
-                
-                
-                
+
+
+
                 <!-- Pager-->
-                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{route('articles.index')}}">Older
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
+                        href="{{ route('articles.index') }}">Older
                         Posts →</a></div>
             </div>
         </div>

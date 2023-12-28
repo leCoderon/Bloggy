@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     /**
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -42,4 +43,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // User peut avoir plusieurs commentaires :
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likedArticles()
+    {
+        return $this->belongsToMany(Article::class, 'article_likes');
+    }
 }

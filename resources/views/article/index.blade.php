@@ -24,17 +24,22 @@
 
                 @forelse ($articles as $article)
                     <!-- Post preview-->
-                <div class="post-preview">
-                    <a href="{{route('article.show', $article->id)}}">
-                        <h2 class="post-title">{{$article->title}}</h2>
-                        <h3 class="post-subtitle">{{$article->sub_title}}</h3>
-                    </a>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#!">{{$article->author->name}}</a>
-                        on {{$article->created_at}}
-                    </p>
-                </div>
+                    <div class="post-preview">
+                        <a href="{{ route('article.show', $article->id) }}">
+                            <h2 class="post-title">{{ $article->title }}</h2>
+                            <h3 class="post-subtitle">{{ $article->sub_title }}</h3>
+                        </a>
+                        <div class="d-flex align-items-center post-meta">
+                            <img src="{{$article->author->avatar ? asset('../storage/avatars/' . $article->author->avatar) : '../default-avatar.png' }}"
+                            id="post_image" alt="">
+                            <div class="ms-3">
+                                <a href="#!">{{ $article->author->name }}</a><br>
+                                {{ $article->created_at }}
+
+                            </div>
+                        </div>
+                    </div>
+
                 <!-- Divider-->
                 <hr class="my-4" />
                 @empty

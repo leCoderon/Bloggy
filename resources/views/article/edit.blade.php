@@ -24,39 +24,36 @@
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="text" name="title" placeholder="Entrez un titre" label="titre de l'article"/>
+                        <x-forms.input type="text" value="{{ $article->title ? $article->title : old($name) }}" name="title" placeholder="Entrez un titre" label="titre de l'article"/>
 
-                        <input type="text" id="title" name="title" class="form-control" value="{{ $article->title }}"
-                            placeholder="Entre votre nom" required />
-                        <label class="form-label" for="title">titre de l'article</label>
                     </div>
                     <!-- name input -->
                     <div class="form-outline mb-4">
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <input type="text" id="title" name="sub_title" class="form-control" value="{{ $article->title }}"
-                            placeholder="Entre votre nom" required />
-                        <label class="form-label" for="title">Sous titre de l'article</label>
-                    </div>
+                        <x-forms.input type="text" value="{{ $article->sub_title ? $article->sub_title : old($name) }}" name="sub_title" placeholder="Entrez un sous titre" label="Sous titre de l'article"/>
+
+                        </div>
 
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         @error('content')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <textarea class="form-control" name="content" id="content" cols="20" rows="10">{{ $article->content }}</textarea>
-                        <label class="form-label" for="content">Contenu de l'article</label>
+                        <x-forms.input type="textarea" value="{{ $article->content ? $article->content : old($name) }}" name="content" placeholder="Entrez un Contenu" label="Contenu de l'article"/>
+
+                       
                     </div>
 
                     <!-- 2 column grid layout for inline styling -->
                     <div class="row mb-4">
                         <div class="col d-flex justify-content-start">
                             <!-- Checkbox -->
+                            
                             <div class="form-check">
-                                <input class="form-check-input" name="online" type="hidden" value="0" />
-                                <input class="form-check-input" name="online" type="checkbox" value="1" id="online" checked />
-                                <label class="form-check-label" for="online">Mettre en ligne</label>
+                                <x-forms.input type="checkbox" value="" name="online" placeholder="" label="Mettre en ligne"/>
+                                
                             </div>
                         </div>
 
@@ -73,4 +70,19 @@
             <div class="col-md-3"></div>
         </div>
     </div>
+    <!-- TyinyMce -->
+    <script src="https://cdn.tiny.cloud/1/li92nzn8r5bu3v7esf01v78ii06i47m98h9vqji25xi6itrh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+          toolbar: 'image undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+          automatic_uploads: true,   
+          images_upload_url: '/upload', // L'URL où les images seront téléchargées
+           images_upload_base_path: '{{ asset('/') }}', // Le chemin de base pour le stockage des images
+           content: {!! json_encode($article->content) !!} // Chargez le contenu initial depuis le modèle
+      
+        });
+      </script>
 @endsection

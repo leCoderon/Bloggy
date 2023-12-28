@@ -23,7 +23,7 @@
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="text" name="name" placeholder="Entrez votre nom" label="Votre nom"/>
+                        <x-forms.input type="text" value="" name="name" placeholder="Entrez votre nom" label="Votre nom"/>
                     </div> 
                   
 
@@ -32,7 +32,7 @@
                         @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="email" name="email" placeholder="Entrez votre email" label="Adresse email"/>
+                        <x-forms.input type="email" value="" name="email" placeholder="Entrez votre email" label="Adresse email"/>
 
                     </div>
 
@@ -41,7 +41,7 @@
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="password" name="password" placeholder="Entrez votre password" label="Mot de passe"/>
+                        <x-forms.input type="password" value="" name="password" placeholder="Entrez votre password" label="Mot de passe"/>
 
                     </div>
 

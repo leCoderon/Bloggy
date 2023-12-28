@@ -27,7 +27,10 @@
 
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <x-forms.input type="email" name="email" placeholder="Entrez votre email" label="Adresse email"/>
+                           @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <x-forms.input type="email" value="" name="email" placeholder="Entrez votre email" label="Adresse email"/>
 
                     </div>
 
@@ -36,7 +39,7 @@
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="password" name="password" placeholder="Entrez votre password" label="Mot de passe"/>
+                        <x-forms.input type="password" value="" name="password" placeholder="Entrez votre password" label="Mot de passe"/>
 
                     </div>
 

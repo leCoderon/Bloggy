@@ -32,7 +32,7 @@
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="text" name="title" placeholder="Entrez un titre" label="titre de l'article"/>
+                        <x-forms.input type="text" value="" name="title" placeholder="Entrez un titre" label="titre de l'article"/>
                        
                     </div>
                     <!-- subTitle input -->
@@ -40,8 +40,7 @@
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="text" name="sub_title" placeholder="Entrez un sous titre" label="Sous titre de l'article"/>
-
+                        <x-forms.input type="text" value="" name="sub_title" placeholder="Entrez un sous titre" label="Sous titre de l'article"/>
                        
                     </div>
 
@@ -50,7 +49,7 @@
                         @error('content')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <x-forms.input type="textarea" name="content" placeholder="Entrez un contenu" label="Contenu de l'article"/>                      
+                        <x-forms.input type="textarea" value="" name="content" placeholder="Entrez un contenu" label="Contenu de l'article"/>                      
                     </div>
 
                     <!-- 2 column grid layout for inline styling -->
@@ -58,7 +57,7 @@
                         <div class="col d-flex justify-content-start">
                             <!-- Checkbox -->
                             <div class="form-check">
-                        <x-forms.input type="checkbox" name="online" label="Mettre en ligne" placeholder="" />                      
+                        <x-forms.input type="checkbox" value="" name="online" label="Mettre en ligne" placeholder="" />                      
                             </div>
                         </div>
 
@@ -75,4 +74,19 @@
             <div class="col-md-3"></div>
         </div>
     </div>
+     <!-- TyinyMce -->
+     <script src="https://cdn.tiny.cloud/1/li92nzn8r5bu3v7esf01v78ii06i47m98h9vqji25xi6itrh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+     <script>
+         tinymce.init({
+           selector: 'textarea',
+           plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+           toolbar: 'image undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+           automatic_uploads: true,   
+           images_upload_url: '/upload', // L'URL où les images seront téléchargées
+            images_upload_base_path: '{{ asset('/') }}', // Le chemin de base pour le stockage des images
+       
+         });
+       </script>
+ 
 @endsection

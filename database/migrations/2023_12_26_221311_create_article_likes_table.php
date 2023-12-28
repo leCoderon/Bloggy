@@ -10,9 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('article_likes', function (Blueprint $table) {
             $table->id();
-            $table->longText('comment');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('article_id');
             $table->timestamps();
@@ -21,6 +20,9 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
 
+            // ->unique(['user_id', 'article_id']) est utilisé pour assurer l'unicité des combinaisons de valeurs dans les colonnes spécifiées,
+            // cela garantit qu'un utilisateur ne peut pas aimer plusieurs fois le même article, et vice versa
+            $table->unique(['user_id', 'article_id']);
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('article_likes');
     }
 };
