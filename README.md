@@ -26,5 +26,5 @@ Pour découvrir Bloggy en action, rendez-vous sur [YouTube](lien_youtube). N'oub
 
 ## Contact
 
-Si vous avez des questions ou des suggestions, n'hésitez pas à nous contacter à [camara13280@gmail.com]. Merci de faire partie de notre communauté de passionnés des mots ! 🌟
+Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter à l'adresse email [camara13280@gmail.com]. À binetôt pour d'autre projet 🌟
 
