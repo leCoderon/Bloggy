@@ -26,5 +26,4 @@ Pour découvrir Bloggy en action, rendez-vous sur [YouTube](lien_youtube). N'oub
 
 ## Contact
 
-Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter à l'adresse email [camara13280@gmail.com]. À binetôt pour d'autre projet 🌟
-
+Si vous souhaitez en savoir plus ou discuter de collaborations potentielles, n'hésitez pas à me contacter à l'adresse email [camara9ismael@gmail.com]. Merci de visiter ce portfolio dédié au marketing malaisien ! 🌟
