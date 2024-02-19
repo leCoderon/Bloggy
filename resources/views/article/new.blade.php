@@ -41,14 +41,22 @@
                         <x-forms.input type="text" value="" name="sub_title" placeholder="Entrez un sous titre" label="Sous titre de l'article"/>
                        
                     </div>
+                    {{-- Test Message --}}
+                    <div class="form-outline mb-4">
+                        @error('title')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <x-forms.input type="text" value="" name="content" placeholder="Entrez un Message" label="Message de l'article"/>
+                       
+                    </div>
 
                     {{-- Content input --}}
-                    <div class="form-outline mb-4">
+                    {{-- <div class="form-outline mb-4">
                         @error('content')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <x-forms.input type="textarea" value="" name="content" placeholder="Entrez un contenu" label="Contenu de l'article"/>                      
-                    </div>
+                    </div> --}}
 
                     {{-- 2 column grid layout for inline styling --}}
                     <div class="row mb-4">

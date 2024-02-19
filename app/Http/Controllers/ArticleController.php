@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ArtcileCreated;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -18,7 +20,7 @@ class ArticleController extends Controller
     {
 
         // Pour afficher les articles les plus récents
-        $articles = $article::orderBy('updated_at', 'desc')->paginate(10);
+        $articles = $article::where('online', 1)->orderBy('updated_at', 'desc')->paginate(10);
         return view('article.index', ['articles' => $articles]);
     }
     /**
@@ -28,7 +30,7 @@ class ArticleController extends Controller
     public function homepage(Article $article)
     {
         // Pour afficher les articles les plus récents
-        $articles = $article::orderBy('updated_at', 'desc')->paginate(10);
+        $articles = $article::where('online', 1)->orderBy('updated_at', 'desc')->paginate(10);
         return view('homepage', ['articles' => $articles]);
     }
 
@@ -68,6 +70,7 @@ class ArticleController extends Controller
         $article->online = $request->online;
         $article->user_id = Auth::user()->id;
         $article->save();
+       
         return redirect()->back()->with('success', 'Votre article a bien été créer');
     }
 
@@ -78,8 +81,9 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $likes = $article->likes()->count();
+        // Mail::send(new ArtcileCreated($article));
 
-        return view('article.show', ['article' => $article, 'likes' => $likes]);
+        return view('article.show', ['article' => $article, 'likes' => $likes])->with('success', 'Votre article a bien été créer');
     }
 
     /**

@@ -32,15 +32,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
     // Articles route
-    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-    Route::get('/article.new', [ArticleController::class, 'new'])->name('article.new');
-    Route::get('/article.show/{article}', [ArticleController::class, 'show'])->name('article.show');
-    Route::post('/article.store', [ArticleController::class, 'store'])->name('article.store');
-    Route::get('/article.delete/{article}', [ArticleController::class, 'delete'])->name('article.delete');
-    Route::get('/article.edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
-    Route::post('/article.update/{article}', [ArticleController::class, 'update'])->name('article.update');
-    // Les likes
-    Route::post('/article/{article}/like', [ArticleController::class, 'like'])->name('article.like');
+    Route::prefix('/articles')->group(function () {
+        Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+        Route::get('/new', [ArticleController::class, 'new'])->name('article.new');
+        Route::get('/{article}', [ArticleController::class, 'show'])->name('article.show');
+        Route::post('/store', [ArticleController::class, 'store'])->name('article.store');
+        Route::get('/delete/{article}', [ArticleController::class, 'delete'])->name('article.delete');
+        Route::get('/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
+        Route::post('/update/{article}', [ArticleController::class, 'update'])->name('article.update');
+        // Les likes
+        Route::post('/{article}/like', [ArticleController::class, 'like'])->name('article.like');
+
+    });
 
     // Importer les images via le tynimce
     Route::post('/upload', [ImageUploadController::class, 'upload']);
@@ -74,12 +77,7 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
-Route::post('/contact', [ContactController::class, 'handleContact'])->name('handleContact');
 
-
-// Route::get('/message', [MessageController::class, 'message'])->name('message');
-// Route::post('/message', [MessageController::class, 'handleMessage'])->name('handleMessage');
 
 
 

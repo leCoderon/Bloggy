@@ -31,11 +31,10 @@ class AvatarController extends Controller
         if ($user->avatar) {
             Storage::disk('public')->delete('avatars/' . $user->avatar);
         }
-        
+
         // Mettre à jour la base de données
         $user->update(['avatar' => null]);
 
         return redirect()->back()->with('success', 'Photo de profil supprimée avec succès.');
-
     }
 }
